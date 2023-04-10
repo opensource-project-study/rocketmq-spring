@@ -60,6 +60,25 @@ import javax.annotation.PostConstruct;
 @AutoConfigureBefore({RocketMQTransactionConfiguration.class})
 
 public class RocketMQAutoConfiguration implements ApplicationContextAware {
+
+    /*
+     * @Import 是 Spring 框架中的一种注解，用于向 Spring 容器中动态地导入其他的配置类或 Bean。<br/>
+     *
+     * @AutoConfigureAfter 和 @AutoConfigureBefore 是 Spring Boot 中的两个注解，用于控制自动配置类的加载顺序。<br/>
+     * @AutoConfigureAfter 注解用于指定当前自动配置类需要在哪些自动配置类之后进行加载；@AutoConfigureBefore` 注解用于指定当前自动配置类需要在哪些自动配置类之前进行加载。<br/>
+     *
+     * @ConditionalOnClass 是 Spring 框架中的一种条件注解，用于根据类路径中是否存在指定的类来决定是否创建当前 Bean。（其中，`value` 属性用于指定要检查的类；`name` 属性用于指定类的完整名称（覆盖 `value` 属性）。如果指定了多个属性，则满足其中任意一个即可。）<br/>
+     * @ConditionalOnBean 是 Spring 框架中的一种条件注解，用于根据容器中是否存在指定类型的 Bean 来决定是否创建当前 Bean。（其中，`value` 属性用于指定要检查的 Bean 类型；`type` 属性用于指定 Bean 的完整名称（覆盖 `value` 属性）；`annotation` 属性用于指定 Bean 上必须存在的注解。如果指定了多个属性，则满足其中任意一个即可。）<br/>
+     * @ConditionalOnMissingBean 是 Spring 框架中的一种条件注解，用于指定一个 Bean 只有在容器中不存在时才会被创建。如果容器中已经存在该类型的 Bean，则该注解所标注的 Bean 不会被创建。<br/>
+     * （`value` 属性用于指定要检查的 Bean 类型；`type` 属性用于指定 Bean 的完整名称（覆盖 `value` 属性）；`annotation` 属性用于指定 Bean 上必须存在的注解。如果指定了多个属性，则满足其中任意一个即可。
+     * 通过使用 `@ConditionalOnMissingBean` 注解，可以很好地控制 Bean 的创建与注入，确保应用能够正确地启动。如果容器中不存在指定类型的 Bean，则会创建当前 Bean；否则跳过创建。）<br/>
+     *
+     * @ConditionalOnProperty` 是 Spring 框架中的一种条件注解，用于根据配置文件中的属性值来判断是否需要创建 Bean。<br/>
+     * （`value` 属性用于指定要检查的属性名；`prefix` 属性用于指定属性的前缀；`name` 属性用于指定属性的完整名称（覆盖 `value` 和 `prefix` 属性）；`havingValue` 属性用于指定属性的期望值；`matchIfMissing` 属性用于指定当属性不存在时，是否匹配成功。）<br/>
+     *
+     * 这些注解的作用是在 Spring 启动时根据实际情况进行 Bean 的创建与注入，可以很好地控制 Bean 的初始化顺序和依赖关系。在 Spring Boot 等基于 Spring 的应用中，这些注解也被广泛地应用于自动装配和自定义配置的实现中。
+     */
+
     private static final Logger log = LoggerFactory.getLogger(RocketMQAutoConfiguration.class);
 
     public static final String ROCKETMQ_TEMPLATE_DEFAULT_GLOBAL_NAME =

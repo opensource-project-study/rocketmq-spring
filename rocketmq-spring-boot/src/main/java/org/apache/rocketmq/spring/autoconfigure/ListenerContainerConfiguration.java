@@ -58,6 +58,13 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
 
     private RocketMQMessageConverter rocketMQMessageConverter;
 
+    /**
+     * 定义了此构造方法后，Spring会把RocketMQMessageConverter,StandardEnvironment,RocketMQProperties等类型的bean自动注入进来
+     *
+     * @param rocketMQMessageConverter
+     * @param environment
+     * @param rocketMQProperties
+     */
     public ListenerContainerConfiguration(RocketMQMessageConverter rocketMQMessageConverter,
         StandardEnvironment environment, RocketMQProperties rocketMQProperties) {
         this.rocketMQMessageConverter = rocketMQMessageConverter;
